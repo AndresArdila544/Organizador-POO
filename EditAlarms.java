@@ -4,44 +4,47 @@
  * and open the template in the editor.
  */
 package Gui;
+
 import static Gui.EventEdit.evento;
-
-
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Ivan Solano
  */
-public class EditGuest extends javax.swing.JFrame {
+public class EditAlarms extends javax.swing.JFrame {
 
     /**
-     * Creates new form EditGuest
+     * Creates new form EditAlarms
      */
-    DefaultListModel listModel = new DefaultListModel();
     DefaultTableModel model;
-    String data [][]={ };
-    String cabeza []={ "Nombre","Correo"};
-    public EditGuest() {
+    DefaultListModel listModel = new DefaultListModel();
+    public EditAlarms() {
         initComponents();
         setResizable(false);
         this.setLocationRelativeTo(null);
+        String data [][]={ };
+        String cabeza []={ "Tipo","Activada","fecha"};
         model= new DefaultTableModel(data,cabeza);
-        for(int i =0; i<evento.getGuestList().size();i++){
-            String datos []={evento.getGuestList().get(i).getNombre(),evento.getGuestList().get(i).getCorreo()};
-            model.addRow(datos);
-        }
+        for(int i=0; i<evento.getAlarm().size(); i++) {
+                String activate;
+            if(evento.getAlarm().get(i).isActivated()){
+                activate = "SI!! ";
+            }else{
+                activate = "NO!!";
+                    
+            }
+                String datos []={evento.getAlarm().get(i).getTipoAlarma(),activate,evento.getAlarm().get(i).getDate().toString()};
+                 model.addRow(datos);
+                //listModel.add(i, evento.getAlarm().get(i).getTipoAlarma()+"       "+activate +evento.getAlarm().get(i).getDate());
+                //listModel.addElement(i);
+            }
+            jTable1EditAlarms.setModel(model);
+            //jList1editalarms.setModel(listModel);
         
-        jTable1EditGuest.setModel(model);
-//        for(int i=0; i<evento.getGuestList().size(); i++) {
-//                listModel.add(i, evento.getGuestList().get(i).getNombre()+"           "+evento.getGuestList().get(i).getCorreo());
-//                //listModel.addElement(i);
-//            }
-//
-//            jList1editguest.setModel(listModel);
+        
+        
     }
 
     /**
@@ -54,16 +57,28 @@ public class EditGuest extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1EditAlarms = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1EditGuest = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Invitados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Alarmas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        jButton1.setText("Agregar Invitados");
+        jTable1EditAlarms.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1EditAlarms);
+
+        jButton1.setText("Agregar Alarma");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,30 +92,10 @@ public class EditGuest extends javax.swing.JFrame {
             }
         });
 
-        jTable1EditGuest.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1EditGuest);
-
         jButton3.setText("Eliminar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Guardar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -111,31 +106,28 @@ public class EditGuest extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 19, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton2)
-                        .addGap(8, 8, 8))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap())
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,65 +152,29 @@ public class EditGuest extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
         this.setVisible(false);
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-        int index =jTable1EditGuest.getSelectedRow();
-        evento.getGuestList().remove(index);
-        DefaultListModel listModel1 = new DefaultListModel();
+        int index =jTable1EditAlarms.getSelectedRow();
+        evento.getAlarm().remove(index);
         model.removeRow(index);
 //        for(int i=0; i<evento.getGuestList().size(); i++) {
-//            
-//                listModel1.add(i, evento.getGuestList().get(i).getNombre()+"           "+evento.getGuestList().get(i).getCorreo());
+//                listModel.add(i, evento.getGuestList().get(i).getNombre()+"           "+evento.getGuestList().get(i).getCorreo());
 //                //listModel.addElement(i);
 //            }
 
-            jTable1EditGuest.setModel(model);
+         jTable1EditAlarms.setModel(model);
+        
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        Invitados1 obj = new Invitados1();
-        obj.setVisible(true);
-        
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Los Cambios han sido Guardados!!");
-        String data [][]={ };
-        String cabeza []={ "Nombre","Correo"};
-        DefaultTableModel model1= new DefaultTableModel(data,cabeza);
-        for(int i =0; i<evento.getGuestList().size();i++){
-            String datos []={evento.getGuestList().get(i).getNombre(),evento.getGuestList().get(i).getCorreo()};
-            model1.addRow(datos);
-        }
-        
-        JTable table=new  JTable();
-        table.setModel(model);
-        
-        EventEdit.jTable1EventEdit=table;
-        
-        
-//        DefaultListModel listModel1 = new DefaultListModel();
-//        for(int i=0; i<evento.getGuestList().size(); i++) {
-//                listModel1.add(i, evento.getGuestList().get(i).getNombre()+"           "+evento.getGuestList().get(i).getCorreo());
-//                //listModel.addElement(i);
-//            }
-//
-//            jList1EventEdit.setModel(listModel1);
-        
-        
-        
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,20 +193,20 @@ public class EditGuest extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditGuest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditAlarms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditGuest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditAlarms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditGuest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditAlarms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditGuest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditAlarms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditGuest().setVisible(true);
+                new EditAlarms().setVisible(true);
             }
         });
     }
@@ -259,9 +215,8 @@ public class EditGuest extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1EditGuest;
+    private javax.swing.JTable jTable1EditAlarms;
     // End of variables declaration//GEN-END:variables
 }

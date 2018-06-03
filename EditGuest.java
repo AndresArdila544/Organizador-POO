@@ -5,11 +5,10 @@
  */
 package Gui;
 import static Gui.EventEdit.evento;
-
+import static Gui.EventEdit.jTable1EventEdit;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -199,11 +198,7 @@ public class EditGuest extends javax.swing.JFrame {
             String datos []={evento.getGuestList().get(i).getNombre(),evento.getGuestList().get(i).getCorreo()};
             model1.addRow(datos);
         }
-        
-        JTable table=new  JTable();
-        table.setModel(model);
-        
-        EventEdit.jTable1EventEdit=table;
+        jTable1EventEdit.setModel(model1);
         
         
 //        DefaultListModel listModel1 = new DefaultListModel();
