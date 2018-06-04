@@ -36,6 +36,7 @@ public class Busqueda extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         input = new javax.swing.JTextField();
         inputDate = new com.toedter.calendar.JDateChooser();
@@ -47,6 +48,8 @@ public class Busqueda extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         jLabel2.setText("Nombre");
+
+        jLabel5.setText("jLabel5");
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Buscar Evento");
@@ -252,6 +255,7 @@ public class Busqueda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
