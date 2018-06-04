@@ -9,6 +9,7 @@ import Bussines.LoadDatas;
 import Data.Event;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -122,12 +123,17 @@ public class Events extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+     if(jList1.getSelectedIndex()!=-1)
+     {
         eventChoose=jList1.getSelectedValue();
         this.setVisible(false);
         Alarmas obj= new Alarmas();
         obj.setVisible(true);
         obj.setLocationRelativeTo(this);
-        
+     }else
+     {
+         JOptionPane.showMessageDialog(this,"Seleccione alguno");
+     }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

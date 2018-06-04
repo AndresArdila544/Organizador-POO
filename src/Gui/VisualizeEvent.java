@@ -116,28 +116,39 @@ public final class VisualizeEvent extends javax.swing.JFrame {
         if(workEvent.getAlarm().isEmpty()){
             
         }else{
-           String data2 [][]={ };
-           String cabeza2 []={ "Tipo","Activada","fecha"};
-           DefaultTableModel model23= new DefaultTableModel(data2,cabeza2);
-           for(int i=0; i<workEvent.getAlarm().size(); i++) {
+            
+            try
+            {
+                String data2 [][]={ };
+                String cabeza2 []={ "Tipo","Activada","fecha"};
+                DefaultTableModel model23= new DefaultTableModel(data2,cabeza2);
+
+                for(int i=0; i<workEvent.getAlarm().size(); i++) {
+
+                     String activate;
+                     if(workEvent.getAlarm().get(i).isActivated()){
+                         activate = "SI!!";
+                     }else{
+                         activate = "NO!!";
+                     }
+                          System.out.println("a");    
+
+                          String[] datos={workEvent.getAlarm().get(i).getTipoAlarma(),
+                           activate,workEvent.getAlarm().get(i).getDate().toString(),};
+                           model23.addRow(datos);
+
+
+          //               listModel2.add(i, workEvent.getAlarm().get(i).getTipoAlarma()+"      "+activate +workEvent.getAlarm().get(i).getDate());
+                          //listModel.addElement(i);
+                      }
                 
-           String activate;
-           if(workEvent.getAlarm().get(i).isActivated()){
-               activate = "SI!!";
-           }else{
-               activate = "NO!!";
-           }
-            
-            
-                 String datos []={workEvent.getAlarm().get(i).getTipoAlarma(),activate,workEvent.getAlarm().get(i).getDate().toString()};
-                 model23.addRow(datos);
-            
-            
-//               listModel2.add(i, workEvent.getAlarm().get(i).getTipoAlarma()+"      "+activate +workEvent.getAlarm().get(i).getDate());
-                //listModel.addElement(i);
+                jTable1AlarmVisualizeEvent.setModel(model23);
             }
-            jTable1AlarmVisualizeEvent.setModel(model23);
-            //jList2.setModel(listModel2); 
+            catch(NullPointerException e)
+            {
+                
+            }
+                      
         }
        
     
